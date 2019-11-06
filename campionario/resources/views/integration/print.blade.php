@@ -29,7 +29,7 @@
     
 </style>
 <div class="cont" style="border:1px solid black;">
-       
+        
 <div style="display:flex;border:1px solid black;">
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center">
@@ -43,7 +43,7 @@
               
             </div>
             <div style="width:40%;text-align:center;padding-top:45px">
-            <h2> les echontillonages </h2>
+            <h2> les integrations </h2>
             </div>
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center;padding-top:15px">
@@ -58,87 +58,67 @@
            
             </div>
             
-         </div>   
-         <?php $i=0; ?>  
-         @foreach($campionarios  as $campionario)
-         <?php $i++; ?>
+         </div> 
+          
+                 
+         @foreach($integrations  as $integration)
          <br>
-         <div><h3> L'echantillonage  {{ $i }} </h3></div>
+         <div><h3> L'integration  {{ $integration->code }} </h3></div>
          <hr>
         <div >
-            <h4>Accessoire </h4>
+            <h4>Code </h4>
             <div >
             <div class="databox">
             <h6>
-            @foreach($accessoires  as $accessoire)
-                @if ($campionario->idaccessoire == $accessoire->id )
-                {{ $accessoire->code }}
-                @endif
-                             
-             @endforeach
+                              {{ $integration->code }}
             </h6>
             </div>
             </div>
 
         </div>
         <div >
-            <h4>Fournisseur </h4>
-            <div >
+            <h4>Type de defaut </h4>
             <div class="databox">
-            <h6>
-            @foreach($fournisseurs  as $fournisseur)
-                    @if ($campionario->idfournisseur == $fournisseur->id )
-                         {{ $fournisseur->fullname }}
-                    @endif
-                             
-             @endforeach
-            </h6>
+            <h6>{{ $integration->type_defaut }}</h6>
             </div>
-            </div>
-
         </div>
         <div >
             <h4>Quantité </h4>
             <div class="databox">
-            <h6>{{ $campionario->qte }}</h6>
-            </div>
-        </div>
-        <div >
-            <h4>Numero du facture </h4>
-            <div class="databox">
             <h6>
-            {{ $campionario->numfacture }}
+            {{ $integration->qte }}
             </h6>
             </div>
 
         </div>
         <div >
-            <h4>Saison</h4>
+            <h4>Cause defaut </h4>
             <div class="databox">
             <h6>
-            {{ $campionario->saison }}
+            {{ $integration->cuse_defaut }}
             </h6>
             </div>
 
         </div>
         <div >
-            <h4>Etat </h4>
+            <h4>Date d'entré </h4>
             <div class="databox">
             <h6>
-            @if ($campionario->stat == 0 )
-
-            Bloqué
-
-            @else
-            Debloqué
-            @endif
-            
+            {{ $integration->date_entree }}
             </h6>
             </div>
 
         </div>
-       
-       
+        <div >
+            <h4>Date de sortie </h4>
+            <div class="databox">
+            <h6>
+            {{ $integration->date_sortie }}
+            </h6>
+            </div>
+
+        </div>
+        
         @endforeach
 </div>
 <script>

@@ -106,6 +106,7 @@ margin-right: 0 !important;
                       </thead>
                       <tbody>
                         <?php $i=0; ?>
+                        <form action="/campionario/print" method="POST">
                         @if ( count($campionarios) > 0 )
                         @foreach( $campionarios as $campionario )
                           <tr>
@@ -158,9 +159,9 @@ margin-right: 0 !important;
                   </div>  
                   <div class="row">
                     <div class="col-md-10"></div>
-                    <div class="col-md-2" style="text-align:center"> <a href="/imprimer/accessoire/{}" class="btn btn-success"> Imprimer </a></div>
+                    <div class="col-md-2" style="text-align:center"> <input type="submit" class="btn btn-success" value="Imprimer"></div>
                   </div>     
-                            
+                        <form>    
                     </div>
            
     </div>
@@ -248,7 +249,8 @@ margin-right: 0 !important;
           </tr>
 
           <tr>
-            <td> <label> Utilisateur </label><input type="text"  disabled class="form-control" value="{{ Auth::user()->name }}" name="user"> </td>
+            <td> <label> Utilisateur </label><input type="text"  disabled class="form-control" value="{{ Auth::user()->name }}">
+            <input type="hidden"  class="form-control" value="{{ Auth::user()->name }}" name="user"> </td>
             
             <td> <label> Numéro </label><input name="numero" type="text"  class="form-control" placeholder="tapper le numero" > </td>
           </tr>
@@ -265,11 +267,12 @@ margin-right: 0 !important;
             <label>Code </label>  
           </div>
           <div class="col-sm-9"> 
-            <select disabled name="idaccessoire" class="form-control">
+            <select disabled name="" class="form-control">
                               @foreach($accessoires as $accessoire )
                                 @if ($accessoire->id == $campionario->idaccessoire )
                                     <option value="{{ $accessoire->id }}">{{ $accessoire->code }}</option>
-                                    
+                                    <input type="hidden" name="idaccessoire" value="{{ $accessoire->id }}">     
+                               
                                 @endif  
                               @endforeach
                           
@@ -288,9 +291,10 @@ margin-right: 0 !important;
               <div class="col-sm-9"> 
                               @foreach($accessoires as $accessoire )
                                 @if ($accessoire->id == $campionario->idaccessoire )
-                                <input disabled type="text" class="form-control" name="couleuraccessoire" value="{{ $accessoire->color }}">
+                                <input disabled type="text" class="form-control"  value="{{ $accessoire->color }}">
                                     
-                                    
+                                <input type="hidden" name="couleuraccessoire" value="{{ $accessoire->color }}">     
+                                   
                                 @endif  
                               @endforeach
                      
@@ -302,11 +306,11 @@ margin-right: 0 !important;
                   <label>Fournisseur </label>  
               </div>
               <div class="col-sm-9"> 
-                <select disabled name="idfournisseur" class="form-control">
+                <select disabled  class="form-control">
                               @foreach($fournisseurs as $fournisseur )
                                 @if ($fournisseur->id == $campionario->idfournisseur )
                                 <option value="{{ $fournisseur->id }}">{{ $fournisseur->fullname }}</option>
-                                      
+                                 <input type="hidden" name="idfournisseur" value="{{ $fournisseur->id }}">     
                                 @endif  
                               @endforeach
                           
@@ -362,7 +366,7 @@ margin-right: 0 !important;
 <div class="modal fade" id="fichiercontrole{{ $fichecontrole->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <form action="#" method="POST">
+        <form action="/fichecontrole/print/{{ $fichecontrole->id }}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">fichier de controle </h5>
@@ -374,7 +378,7 @@ margin-right: 0 !important;
       <table class="table table-bordered">
         <thead>
           <tr>
-            <td> logo </td>
+            <td><img img src="{{ asset('img/logo.png') }}" width="150" height="70"></td>
             <td rowspan="2" style="text-align: center;padding-top:30px;"><h2> fiche de controle </h2></td>
             <td> {{ $fichecontrole->created_at }} </td>
           </tr>

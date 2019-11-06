@@ -29,7 +29,7 @@
     
 </style>
 <div class="cont" style="border:1px solid black;">
-       
+        
 <div style="display:flex;border:1px solid black;">
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center">
@@ -43,7 +43,7 @@
               
             </div>
             <div style="width:40%;text-align:center;padding-top:45px">
-            <h2> les echontillonages </h2>
+            <h2> les approbations </h2>
             </div>
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center;padding-top:15px">
@@ -58,87 +58,89 @@
            
             </div>
             
-         </div>   
-         <?php $i=0; ?>  
-         @foreach($campionarios  as $campionario)
-         <?php $i++; ?>
+         </div> 
+          
+                 
+         @foreach($approbations  as $approbation)
          <br>
-         <div><h3> L'echantillonage  {{ $i }} </h3></div>
+         <div><h3> L'approbation  {{ $approbation->code }} </h3></div>
          <hr>
         <div >
-            <h4>Accessoire </h4>
+            <h4>Code </h4>
             <div >
             <div class="databox">
             <h6>
-            @foreach($accessoires  as $accessoire)
-                @if ($campionario->idaccessoire == $accessoire->id )
-                {{ $accessoire->code }}
-                @endif
-                             
-             @endforeach
+                              {{ $approbation->code }}
             </h6>
             </div>
+            </div>
+
+        </div>
+        <div >
+            <h4>Couleur </h4>
+            <div class="databox">
+            <h6>{{ $approbation->color }}</h6>
+            </div>
+        </div>
+        <div >
+            <h4>Numero Echantion </h4>
+            <div class="databox">
+            <h6>
+            {{ $approbation->num_echentient }}
+            </h6>
             </div>
 
         </div>
         <div >
             <h4>Fournisseur </h4>
-            <div >
             <div class="databox">
             <h6>
-            @foreach($fournisseurs  as $fournisseur)
-                    @if ($campionario->idfournisseur == $fournisseur->id )
-                         {{ $fournisseur->fullname }}
-                    @endif
-                             
-             @endforeach
-            </h6>
-            </div>
-            </div>
-
-        </div>
-        <div >
-            <h4>Quantité </h4>
-            <div class="databox">
-            <h6>{{ $campionario->qte }}</h6>
-            </div>
-        </div>
-        <div >
-            <h4>Numero du facture </h4>
-            <div class="databox">
-            <h6>
-            {{ $campionario->numfacture }}
-            </h6>
-            </div>
-
-        </div>
-        <div >
-            <h4>Saison</h4>
-            <div class="databox">
-            <h6>
-            {{ $campionario->saison }}
-            </h6>
-            </div>
-
-        </div>
-        <div >
-            <h4>Etat </h4>
-            <div class="databox">
-            <h6>
-            @if ($campionario->stat == 0 )
-
-            Bloqué
-
-            @else
-            Debloqué
+            @foreach($fournisseurs as $fournisseur)
+            @if ($fournisseur->id == $approbation->fournisseur)
+            {{ $fournisseur->fullname }}
             @endif
-            
+            @endforeach
             </h6>
             </div>
 
         </div>
-       
-       
+        <div >
+            <h4>Date </h4>
+            <div class="databox">
+            <h6>
+            {{ $approbation->date }}
+            </h6>
+            </div>
+
+        </div>
+        <div >
+            <h4>Decision </h4>
+            <div class="databox">
+            <h6>
+            {{ $approbation->decision }}
+            </h6>
+            </div>
+
+        </div>
+        <div >
+            <h4>Note </h4>
+            <div class="databox">
+            <h6>
+            {{ $approbation->note }}
+            </h6>
+            </div>
+
+        </div>
+        <div >
+            <h4>saison </h4>
+            <div class="databox">
+            <h6>
+            {{ $approbation->season }}
+            </h6>
+            </div>
+
+        </div>
+        
         @endforeach
 </div>
 <script>

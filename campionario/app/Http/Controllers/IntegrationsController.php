@@ -98,4 +98,11 @@ class IntegrationsController extends Controller
     {
         //
     }
+    public function printed(Request $request){ 
+        //$campionarios = Campionario::all();
+        $integrations = Integration::whereIn('id', $request->input("printed"))->get();
+        //$fournisseurs = Fournisseur::all();
+        return view('integration.print')->with('integrations',$integrations);
+                
+    }
 }

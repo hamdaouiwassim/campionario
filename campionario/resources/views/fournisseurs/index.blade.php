@@ -81,6 +81,8 @@
                       </thead>
                       <tbody>
                       <?php $i=0; ?>  
+                      <form action="/fournisseur/print" method="POST">     
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       @foreach($fournisseurs as $fournisseur)
                         <?php $i++; ?>
                           <tr>
@@ -98,9 +100,9 @@
                   </div>  
                   <div class="row">
                     <div class="col-md-10"></div>
-                    <div class="col-md-2" style="text-align:center"> <a href="/imprimer/accessoire/{}" class="btn btn-success"> Imprimer </a></div>
+                    <div class="col-md-2" style="text-align:center"> <input type="submit" class="btn btn-success" value="Imprimer"></div>
                   </div>    
-                            
+                     </form>       
                     </div>
            
     </div>

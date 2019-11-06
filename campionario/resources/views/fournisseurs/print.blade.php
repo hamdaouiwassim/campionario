@@ -29,7 +29,7 @@
     
 </style>
 <div class="cont" style="border:1px solid black;">
-       
+        
 <div style="display:flex;border:1px solid black;">
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center">
@@ -43,7 +43,7 @@
               
             </div>
             <div style="width:40%;text-align:center;padding-top:45px">
-            <h2> les echontillonages </h2>
+            <h2> les fournisseurs </h2>
             </div>
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center;padding-top:15px">
@@ -58,87 +58,48 @@
            
             </div>
             
-         </div>   
-         <?php $i=0; ?>  
-         @foreach($campionarios  as $campionario)
-         <?php $i++; ?>
+         </div> 
+          
+         @foreach($fournisseurs  as $fournisseur)
          <br>
-         <div><h3> L'echantillonage  {{ $i }} </h3></div>
+         <div><h3> La fournisseur : {{ $fournisseur->fullname }} </h3></div>
          <hr>
         <div >
-            <h4>Accessoire </h4>
+            <h4>Nom </h4>
             <div >
             <div class="databox">
             <h6>
-            @foreach($accessoires  as $accessoire)
-                @if ($campionario->idaccessoire == $accessoire->id )
-                {{ $accessoire->code }}
-                @endif
-                             
-             @endforeach
+                              {{ $fournisseur->fullname }}
             </h6>
             </div>
             </div>
 
         </div>
         <div >
-            <h4>Fournisseur </h4>
-            <div >
+            <h4>Adresse </h4>
+            <div class="databox">
+            <h6>{{ $fournisseur->adresse }}</h6>
+            </div>
+        </div>
+        <div >
+            <h4>Telephone </h4>
             <div class="databox">
             <h6>
-            @foreach($fournisseurs  as $fournisseur)
-                    @if ($campionario->idfournisseur == $fournisseur->id )
-                         {{ $fournisseur->fullname }}
-                    @endif
-                             
-             @endforeach
+            {{ $fournisseur->telephone }}
             </h6>
-            </div>
             </div>
 
         </div>
         <div >
-            <h4>Quantité </h4>
-            <div class="databox">
-            <h6>{{ $campionario->qte }}</h6>
-            </div>
-        </div>
-        <div >
-            <h4>Numero du facture </h4>
+            <h4>Email </h4>
             <div class="databox">
             <h6>
-            {{ $campionario->numfacture }}
+            {{ $fournisseur->email }}
             </h6>
             </div>
 
         </div>
-        <div >
-            <h4>Saison</h4>
-            <div class="databox">
-            <h6>
-            {{ $campionario->saison }}
-            </h6>
-            </div>
-
-        </div>
-        <div >
-            <h4>Etat </h4>
-            <div class="databox">
-            <h6>
-            @if ($campionario->stat == 0 )
-
-            Bloqué
-
-            @else
-            Debloqué
-            @endif
-            
-            </h6>
-            </div>
-
-        </div>
-       
-       
+        
         @endforeach
 </div>
 <script>

@@ -78,6 +78,8 @@
                           <th>Selection </th>
                       </thead>
                       <tbody>
+                      <form action="/approbation/print" method="POST">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           @foreach( $approbations as $approbation )
                           <tr>
                             <td>{{ $approbation->code }}  </td>
@@ -88,10 +90,10 @@
                                           {{ $fournisseur->fullname }}
                                       @endif
                                   @endforeach  </td>
-                            <td> {{ $approbation->date }}</td>
-                            <td> {{ $approbation->decision }}  </td>
-                            <td> {{ $approbation->note }}  </td>
                             <td> {{ $approbation->season }}</td>
+                            <td> {{ $approbation->date }}  </td>
+                            <td> {{ $approbation->decision }}  </td>
+                            <td> {{  $approbation->note}}</td>
                             <td> <input type="checkbox" name="printed[]" value="{{ $approbation->id }}" > </td>
                           </tr>
                           @endforeach
@@ -102,8 +104,9 @@
                     </div>
                     <div class="row">
                     <div class="col-md-10"></div>
-                    <div class="col-md-2" style="text-align:center"> <a href="/imprimer/accessoire/{}" class="btn btn-success"> Imprimer </a></div>
+                    <div class="col-md-2" style="text-align:center"> <input type="submit" class="btn btn-success" value="Imprimer" ></div>
                   </div> 
+                  </form>
            
     </div>
   </div>

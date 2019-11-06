@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Accessoire;
 use App\Fournisseur;
+use App\FicheControle;
 class AccessoiresController extends Controller
 {
     /**
@@ -115,4 +116,13 @@ class AccessoiresController extends Controller
         $accessoire->delete();
         return redirect("/accessoires");
     }
+    public function printed(Request $request){
+        
+        
+        //$campionarios = Campionario::all();
+        $accessoires = Accessoire::whereIn('id', $request->input("printed"))->get();
+        $fournisseurs = Fournisseur::all();
+        return view('accessoires.print')->with('accessoires',$accessoires)->with('fournisseurs',$fournisseurs);
+                
+        }
 }

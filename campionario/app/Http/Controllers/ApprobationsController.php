@@ -103,4 +103,11 @@ class ApprobationsController extends Controller
     {
         //
     }
+    public function printed(Request $request){ 
+        //$campionarios = Campionario::all();
+        $approbations = Approbation::whereIn('id', $request->input("printed"))->get();
+        $fournisseurs = Fournisseur::all();
+        return view('approbation.print')->with('approbations',$approbations)->with('fournisseurs',$fournisseurs);
+                
+    }
 }

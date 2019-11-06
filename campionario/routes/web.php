@@ -41,3 +41,11 @@ Route::post('/accessoire/update/{id}','AccessoiresController@update')->middlewar
 Route::get('/accessoires','AccessoiresController@index')->middleware('auth');
 Route::get('/fournisseurs','FournisseursController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::post('/accessoire/print', 'AccessoiresController@printed')->middleware('auth');
+Route::post('/fournisseur/print', 'FournisseursController@printed')->middleware('auth');
+Route::post('/campionario/print', 'CampionariosController@printed')->middleware('auth');
+Route::post('/reclamation/print', 'ReclamationsController@printed')->middleware('auth');
+Route::post('/integration/print', 'IntegrationsController@printed')->middleware('auth');
+Route::post('/approbation/print', 'ApprobationsController@printed')->middleware('auth');
+Route::post('/fichecontrole/print/{id}', 'FichecontrolesController@printed')->middleware('auth');
+Route::post('//reclamation/modify/{id}', 'ReclamationsController@edit')->middleware('auth');

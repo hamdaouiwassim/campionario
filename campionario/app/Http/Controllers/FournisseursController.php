@@ -109,4 +109,13 @@ class FournisseursController extends Controller
         $fournisseur->delete();
         return redirect("/fournisseurs");
     }
+    public function printed(Request $request){
+        
+        
+        //$campionarios = Campionario::all();
+        $fournisseurs = Fournisseur::whereIn('id', $request->input("printed"))->get();
+        //$fournisseurs = Fournisseur::all();
+        return view('fournisseurs.print')->with('fournisseurs',$fournisseurs);
+                
+        }
 }

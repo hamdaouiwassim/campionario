@@ -144,4 +144,14 @@ class CampionariosController extends Controller
         $fournisseurs = Fournisseur::all();
         return view('camionarios.print')->with('campionarios',$campionarios)->with('fournisseurs',$fournisseurs)->with('accessoires',$accessoires)->with('fichecontrole',$fichedecontrole);
     }
+    public function printed(Request $request){
+        
+        
+        $accessoires = Accessoire::all();
+        $fournisseurs = Fournisseur::all();
+        $campionarios = Campionario::whereIn('id', $request->input("printed"))->get();
+        //$fournisseurs = Fournisseur::all();
+        return view('camionarios.print')->with('campionarios',$campionarios)->with('accessoires',$accessoires)->with('fournisseurs',$fournisseurs);
+                
+    }
 }

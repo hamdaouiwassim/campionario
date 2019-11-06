@@ -99,6 +99,8 @@
 
                       </thead>
                       <tbody>
+                      <form action="/reclamation/print" method="POST">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @foreach( $reclamations as $reclamation )
                           <tr>
                             <td>{{ $reclamation->claimed_by }}</td>
@@ -148,8 +150,9 @@
                   </div>
                   <div class="row">
                     <div class="col-md-10"></div>
-                    <div class="col-md-2" style="text-align:center"> <a href="/imprimer/accessoire/{}" class="btn btn-success"> Imprimer </a></div>
+                    <div class="col-md-2" style="text-align:center"> <input type="submit" class="btn btn-success" value="Imprimer" ></div>
                   </div>
+                  </form>
            
     </div>
 
@@ -234,10 +237,10 @@
 <div class="modal fade" id="reclamation{{ $reclamation->id  }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <form action="/reclamation/modify" method="POST">
+        <form action="/reclamation/modify/{{ $reclamation->id  }}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une reclamation </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une reclamation </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -253,43 +256,43 @@
                   <label> Facture fournisseur </label>
                   <input type="text" class="form-control" value="{{ $reclamation->supplier_invoice }}" name="supplier_invoice">
                   <label> Code accessoire </label>
-                  <input type="text" class="form-control" name="code_accessory">
+                  <input type="text" class="form-control" value="{{ $reclamation->code_accessory }}" name="code_accessory">
                   <label> Couleur </label>
-                  <input type="text" class="form-control" name="color">
+                  <input type="text" class="form-control" value="{{ $reclamation->color }}" name="color">
                   <label> Famille </label>
-                  <input type="text" class="form-control" name="famille">
+                  <input type="text" class="form-control" value="{{ $reclamation->family }}" name="family">
                   <label> Sous famille </label>
-                  <input type="text" class="form-control" name="sfamille">
+                  <input type="text" class="form-control" value="{{ $reclamation->sfamily }}" name="sfamily">
                   <label> Date de reception </label>
-                  <input type="date" class="form-control" name="date_receive">
+                  <input type="date" class="form-control" value="{{ $reclamation->date_receive }}" name="date_receive">
                   <label> Prix Unitaire </label>
-                  <input type="number" step="0.01" class="form-control" name="price">
+                  <input type="number" step="0.01" value="{{ $reclamation->price }}" class="form-control" name="price">
                   <label> Quantité </label>
-                  <input type="number" class="form-control" name="quantity">
+                  <input type="number" value="{{ $reclamation->quantity }}" class="form-control" name="quantity">
                   <label> Prix total </label>
-                  <input type="number" step="0.01" class="form-control" name="total_amount">
+                  <input type="number" step="0.01" value="{{ $reclamation->total_amount }}" class="form-control" name="total_amount">
                   <label>Quantité reclamé </label>
-                  <input type="number" name="claimed_accessory" class="form-control"     >
+                  <input type="number" value="{{ $reclamation->claimed_accessory }}" name="claimed_accessory" class="form-control"     >
                   <label>garments</label>
-                  <input type="number" name="garments" class="form-control"              >
+                  <input type="number" name="garments" class="form-control"   value="{{ $reclamation->garments }}"           >
                   <label>Type de defaut</label>
-                  <input type="number" name="industrial_unit_cost" class="form-control"  >
+                  <input type="number" name="industrial_unit_cost" class="form-control"  value="{{ $reclamation->industrial_unit_cost }}">
                   <label>Decision</label>
-                  <input type="text" name="out_of_standard_detected" class="form-control"       >
+                  <input type="text" name="out_of_standard_detected" class="form-control"   value="{{ $reclamation->out_of_standard_detected }}"    >
                   <label>QC</label>
-                  <input type="text" name="QC" class="form-control"                    >
+                  <input type="text" name="QC" class="form-control"   value="{{ $reclamation->QC }}"                 >
                   <label>Montant Total facturé au fournisseur</label>
-                  <input type="number" step="0.01" name="total_amount_charged" class="form-control"  >
+                  <input type="number" step="0.01" name="total_amount_charged" class="form-control"  value="{{ $reclamation->total_amount_charged }}"   >
                   <label>detecté par</label>
-                  <input type="text" name="required_by" class="form-control"           >
+                  <input type="text" name="required_by" class="form-control" value="{{ $reclamation->required_by }}"           >
                   <label>referred_to_month</label>
-                  <input type="text" name="referred_to_month" class="form-control"     >
+                  <input type="text" name="referred_to_month" class="form-control" value="{{ $reclamation->referred_to_month }}"     >
                   <label>declaré on</label>
-                  <input type="date" name="claim_issued" class="form-control"          >
+                  <input type="date" name="claim_issued" class="form-control"  value="{{ $reclamation->claim_issued }}"        >
                   <label>approved_by_supplier</label>
-                  <input type="date" name="approved_by_supplier" class="form-control"  >
+                  <input type="date" name="approved_by_supplier" class="form-control" value="{{ $reclamation->approved_by_supplier }}" >
                   <label>debit_note</label>
-                  <input type="text" name="debit_note" class="form-control"            >
+                  <input type="text" name="debit_note" class="form-control"  value="{{ $reclamation->debit_note }}"          >
                   <label>validation</label>
                   <input type="text" disabled name="validation" class="form-control" value="en cours"           >
 

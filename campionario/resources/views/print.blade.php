@@ -30,27 +30,27 @@
 </style>
 <div class="cont" style="border:1px solid black;">
        
-<div style="display:flex;border:1px solid black;">
+        <div style="display:flex;border:1px solid black;">
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center">
                         <img src="{{ asset('img/logo.png') }}" width="150" height="70">
                         </div>
                         <div style="width:100%;height:100px;text-align:center">
-                        {{ Auth::user()->name }}
+                        {{ $fichecontrole->user }}
                         </div>
                          
              
               
             </div>
             <div style="width:40%;text-align:center;padding-top:45px">
-            <h2> les echontillonages </h2>
+            <h2> Fiche de controle </h2>
             </div>
             <div style="width:30%">
                         <div style="width:100%;height:100px;text-align:center;padding-top:15px">
                         <?php echo date('Y-m-d:H:i:s'); ?>
                         </div>
                         <div style="width:100%;height:100px;text-align:center">
-                        <?php echo uniqid(); ?>
+                        {{ $fichecontrole->numero }} 
                         </div>
             
          
@@ -59,23 +59,17 @@
             </div>
             
          </div>   
-         <?php $i=0; ?>  
-         @foreach($campionarios  as $campionario)
-         <?php $i++; ?>
-         <br>
-         <div><h3> L'echantillonage  {{ $i }} </h3></div>
-         <hr>
+ 
         <div >
             <h4>Accessoire </h4>
             <div >
             <div class="databox">
             <h6>
-            @foreach($accessoires  as $accessoire)
-                @if ($campionario->idaccessoire == $accessoire->id )
-                {{ $accessoire->code }}
-                @endif
-                             
-             @endforeach
+                             @foreach($accessoires as $accessoire)
+                             @if ($accessoire->id == $fichecontrole->idaccessoire )
+                                {{ $accessoire->code }}
+                             @endif
+                             @endforeach
             </h6>
             </div>
             </div>
@@ -83,63 +77,63 @@
         </div>
         <div >
             <h4>Fournisseur </h4>
-            <div >
             <div class="databox">
-            <h6>
-            @foreach($fournisseurs  as $fournisseur)
-                    @if ($campionario->idfournisseur == $fournisseur->id )
+            <h6> @foreach($fournisseurs  as $fournisseur)
+                    @if ($fichecontrole->idfournisseur == $fournisseur->id )
                          {{ $fournisseur->fullname }}
                     @endif
                              
-             @endforeach
-            </h6>
-            </div>
-            </div>
-
-        </div>
-        <div >
-            <h4>Quantité </h4>
-            <div class="databox">
-            <h6>{{ $campionario->qte }}</h6>
+             @endforeach</h6>
             </div>
         </div>
         <div >
-            <h4>Numero du facture </h4>
+            <h4>Couleur  </h4>
             <div class="databox">
             <h6>
-            {{ $campionario->numfacture }}
+            {{ $fichecontrole->couleuraccessoire }}
             </h6>
             </div>
 
         </div>
         <div >
-            <h4>Saison</h4>
+            <h4>Type de controle  </h4>
             <div class="databox">
             <h6>
-            {{ $campionario->saison }}
+            {{ $fichecontrole->typecontrole }}
             </h6>
             </div>
 
         </div>
         <div >
-            <h4>Etat </h4>
+            <h4>Probleme </h4>
             <div class="databox">
             <h6>
-            @if ($campionario->stat == 0 )
-
-            Bloqué
-
-            @else
-            Debloqué
-            @endif
-            
+            {{ $fichecontrole->probleme }}
             </h6>
             </div>
 
         </div>
+        <div >
+            <h4>Decision </h4>
+            <div class="databox">
+            <h6>
+            {{ $fichecontrole->decision }}
+            </h6>
+            </div>
+
+        </div>
+      
        
        
-        @endforeach
+     
+       
+     
+      
+      
+    
+     
+        
+
 </div>
 <script>
     

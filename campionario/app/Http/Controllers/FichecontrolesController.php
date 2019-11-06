@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Fichecontrole;
 use App\Campionario;
-
+use App\Accessoire;
+use App\Fournisseur;
 class FichecontrolesController extends Controller
 {
     /**
@@ -102,4 +103,12 @@ class FichecontrolesController extends Controller
     {
         //
     }
+    public function printed(Request $request,$id){
+            
+        $accessoires = Accessoire::all();
+        $fichecontrole = Fichecontrole::find($id);
+        $fournisseurs = Fournisseur::all();
+        return view('print')->with('accessoires',$accessoires)->with('fournisseurs',$fournisseurs)->with('fichecontrole',$fichecontrole);
+                
+        }
 }

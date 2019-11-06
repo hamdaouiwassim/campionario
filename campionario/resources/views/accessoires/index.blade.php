@@ -81,6 +81,8 @@
                           <th> Selection </th>
                       </thead>
                       <tbody>
+                      <form action="/accessoire/print" method="POST">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @foreach( $accessoires as $accessoire )
                           <tr>
                             <td>{{ $accessoire->code }}</td>
@@ -95,7 +97,7 @@
                             <td>{{ $accessoire->payes }}</td>
                             <td>{{ $accessoire->description }}</td>
                             <td> <button class="btn btn-primary" data-toggle="modal" data-target="#accessoire{{ $accessoire->id }}"> <i class="fas fa-edit"></i> </button> <a href="/accessoire/delete/{{ $accessoire->id }}" onclick="return confirm('Supprimer cette accessoire')" class="btn btn-danger"> <i class="fas fa-trash-alt"></i> </a> </td>
-                            <td><input type="checkbox" name="printed{{ $accessoire->id }}" id="printed{{ $accessoire->id }}" onclick="addtoprinter({{ $accessoire->id }})" value="{{ $accessoire->id }}" ></td>
+                            <td><input type="checkbox" name="printed[]" id="printed{{ $accessoire->id }}"  value="{{ $accessoire->id }}" ></td>
                           </tr>
                         @endforeach
                         
@@ -106,7 +108,7 @@
                   <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2" style="text-align:center"> 
-                        <form method="POST" action="/print">
+                        
                                 <input name="listeprinted" type="hidden" id="listeprinted">
                                 <button type="submit" class="btn btn-success"> Imprimer </button>
                         </form>
