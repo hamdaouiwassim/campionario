@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  ven. 04 oct. 2019 à 10:59
--- Version du serveur :  10.2.3-MariaDB-log
--- Version de PHP :  7.1.1
+-- Host: localhost:3306
+-- Generation Time: Nov 06, 2019 at 10:02 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `campionario`
+-- Database: `campionario`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `accessoires`
+-- Table structure for table `accessoires`
 --
 
 CREATE TABLE `accessoires` (
@@ -42,18 +42,18 @@ CREATE TABLE `accessoires` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `accessoires`
+-- Dumping data for table `accessoires`
 --
 
 INSERT INTO `accessoires` (`id`, `famille`, `sfamille`, `fournisseur`, `code`, `color`, `payes`, `description`, `created_at`, `updated_at`) VALUES
 (4, 'fermetture', 'fermetture divisible', 3, '0000', 'noir', 'Tunisie', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '2019-09-15 19:20:16', '2019-09-15 19:20:50'),
 (5, 'bouton', 'bouton metallique', 4, '0001', 'rouge', 'France', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '2019-09-15 19:26:02', '2019-09-15 19:26:02'),
-(6, 'étiquette', 'étiquette de marque', 5, '0002', 'vert', 'India', 'xxxxxxxxxxxxxxxxxxxxxxxxx', '2019-09-15 19:28:33', '2019-09-15 19:28:33');
+(6, 'étiquette', 'étiquette de marque', 5, '0002', 'vert', 'India', 'description içi..', '2019-09-15 19:28:33', '2019-10-04 09:50:02');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `approbations`
+-- Table structure for table `approbations`
 --
 
 CREATE TABLE `approbations` (
@@ -71,7 +71,7 @@ CREATE TABLE `approbations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `approbations`
+-- Dumping data for table `approbations`
 --
 
 INSERT INTO `approbations` (`id`, `code`, `color`, `num_echentient`, `fournisseur`, `date`, `decision`, `note`, `season`, `created_at`, `updated_at`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `approbations` (`id`, `code`, `color`, `num_echentient`, `fournisseu
 -- --------------------------------------------------------
 
 --
--- Structure de la table `campionarios`
+-- Table structure for table `campionarios`
 --
 
 CREATE TABLE `campionarios` (
@@ -93,26 +93,27 @@ CREATE TABLE `campionarios` (
   `numfacture` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `saison` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` int(11) NOT NULL DEFAULT 0,
-  `stat` int(11) NOT NULL DEFAULT 0,
+  `file` int(11) NOT NULL DEFAULT '0',
+  `stat` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `campionarios`
+-- Dumping data for table `campionarios`
 --
 
 INSERT INTO `campionarios` (`id`, `idaccessoire`, `idfournisseur`, `qte`, `numfacture`, `user`, `saison`, `file`, `stat`, `created_at`, `updated_at`) VALUES
 (4, 4, 3, 10, '1245', 'utilisateur 1', '1qjfgj', 0, 0, '2019-09-11 14:40:00', '2019-09-11 14:40:00'),
 (5, 5, 4, 320, '12jk', 'hamdaoui wassim', 'dzuhfuo', 0, 0, '2019-09-11 14:40:32', '2019-09-11 14:40:32'),
 (6, 6, 4, 20, 'zieivnze', 'utilisateur 1', '1qjfgj', 0, 1, '2019-09-12 16:20:07', '2019-09-12 16:20:07'),
-(7, 4, 5, 12, '12fa23', '2', 'saison1', 0, 0, '2019-10-04 09:46:42', '2019-10-04 09:46:42');
+(7, 4, 5, 12, '12fa23', '2', 'saison1', 0, 0, '2019-10-04 09:46:42', '2019-10-04 09:46:42'),
+(8, 4, 3, 110, '12fa25', '2', 'saison 2', 1, 0, '2019-10-04 09:49:01', '2019-10-04 09:51:45');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fichecontroles`
+-- Table structure for table `fichecontroles`
 --
 
 CREATE TABLE `fichecontroles` (
@@ -131,17 +132,18 @@ CREATE TABLE `fichecontroles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `fichecontroles`
+-- Dumping data for table `fichecontroles`
 --
 
 INSERT INTO `fichecontroles` (`id`, `user`, `numero`, `idaccessoire`, `couleuraccessoire`, `idfournisseur`, `typecontrole`, `probleme`, `decision`, `idcampionario`, `created_at`, `updated_at`) VALUES
 (4, 'Souhir mrabet', '1245896', 4, 'red', 3, 'controle 1', 'probleme1', 'decision 1', 1, '2019-09-03 10:52:46', '2019-09-03 10:52:46'),
-(5, 'hamdaoui wassim', '1245896', 5, 'red', 3, 'controle 1', 'probe 2', 'decision 1', 2, '2019-09-05 15:39:13', '2019-09-05 15:39:13');
+(5, 'hamdaoui wassim', '1245896', 5, 'red', 3, 'controle 1', 'probe 2', 'decision 1', 2, '2019-09-05 15:39:13', '2019-09-05 15:39:13'),
+(6, 'malek', '124', 4, 'noir', 3, 'controle 1', 'probleme 1', 'decision 1', 8, '2019-10-04 09:51:45', '2019-10-04 09:51:45');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fournisseurs`
+-- Table structure for table `fournisseurs`
 --
 
 CREATE TABLE `fournisseurs` (
@@ -155,7 +157,7 @@ CREATE TABLE `fournisseurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `fournisseurs`
+-- Dumping data for table `fournisseurs`
 --
 
 INSERT INTO `fournisseurs` (`id`, `fullname`, `adresse`, `telephone`, `email`, `created_at`, `updated_at`) VALUES
@@ -166,7 +168,7 @@ INSERT INTO `fournisseurs` (`id`, `fullname`, `adresse`, `telephone`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `integrations`
+-- Table structure for table `integrations`
 --
 
 CREATE TABLE `integrations` (
@@ -183,7 +185,7 @@ CREATE TABLE `integrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `integrations`
+-- Dumping data for table `integrations`
 --
 
 INSERT INTO `integrations` (`id`, `code`, `type_defaut`, `qte`, `cause_defaut`, `date_entree`, `date_sortie`, `season`, `created_at`, `updated_at`) VALUES
@@ -194,7 +196,7 @@ INSERT INTO `integrations` (`id`, `code`, `type_defaut`, `qte`, `cause_defaut`, 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -204,7 +206,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -221,7 +223,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -233,7 +235,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reclamations`
+-- Table structure for table `reclamations`
 --
 
 CREATE TABLE `reclamations` (
@@ -262,23 +264,23 @@ CREATE TABLE `reclamations` (
   `approved_by_supplier` date DEFAULT NULL,
   `debit_note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `validation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `reclamations`
+-- Dumping data for table `reclamations`
 --
 
 INSERT INTO `reclamations` (`id`, `claimed_by`, `supplier`, `season`, `supplier_invoice`, `code_accessory`, `color`, `family`, `sfamily`, `date_receive`, `price`, `quantity`, `total_amount`, `claimed_accessory`, `garments`, `industrial_unit_cost`, `out_of_standard_detected`, `QC`, `total_amount_charged`, `required_by`, `referred_to_month`, `claim_issued`, `approved_by_supplier`, `debit_note`, `validation`, `created_at`, `updated_at`) VALUES
 (1, 'societe A', 'Fournisseur 1', 'A', '000', '0000', 'noir', 'fermetture', 'fermetture divisible', '2018-10-29', 0.41, 5112, 615.00, 1500.00, NULL, NULL, 'xxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxx', NULL, 'A', '', '2018-11-03', '2018-11-15', '', 'closed', '2019-09-15 21:00:33', '0000-00-00 00:00:00'),
-(2, 'Societe A', 'Fournisseur 2', 'A', '000', '0001', 'rouge', 'bouton', 'bouton metalique', '2018-09-21', 0.28, 1600, 464.20, 1600.00, NULL, NULL, 'xxxxxxxxxxxxxx', 'xxxxxxxxxxxxxx', NULL, 'A', NULL, '2018-11-01', '2018-11-06', NULL, 'closed', '2019-09-15 21:02:11', '0000-00-00 00:00:00'),
+(2, 'Societe A', 'Fournisseur 2', 'C', '000', '0001', 'rouge', NULL, NULL, '2018-09-21', 0.28, 1600, 464.20, 1600.00, NULL, NULL, 'xxxxxxxxxxxxxx', 'xxxxxxxxxxxxxx', NULL, 'A', NULL, '2018-11-01', '2018-11-06', NULL, NULL, '2019-10-05 17:38:13', '2019-10-05 15:38:13'),
 (3, 'societe A', 'Fournisseur 3', 'A', '000', '0002', 'vert', 'étiquette', 'étiquette de marque', '2019-09-13', 120.32, 25, 125478.00, 1245.00, NULL, 1245, NULL, '', 1245.32, 'A', '', '2019-09-19', '2019-09-27', '', 'en cours', '2019-09-15 21:04:03', '2019-09-12 08:54:28');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -293,133 +295,133 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `type`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'malek', 'malek@gmail.com', 'Administrateur', '$2y$10$6P4X7Eb/sYWQmTeeG1Rsv.xyP8oKniy0Bx6QYxfjZ7Ub5DOn8Ugnm', 'jGbsDZmSIb7gT2roJvck6HksgdTx2oGfoyXrF7q4xXhjqOEcPH24D1AZlLqB', '2019-08-27 07:47:30', '2019-08-27 07:47:30'),
-(2, 'editor', 'editor@gmail.com', 'Editor', '$2y$10$6351eWeoy6aYjIWWV5b.2OeV9OgqBL0murywh0gwR8zAlthTuvCIy', 'TRmCrteMck4B4oxG41t8hJ1Q3btOdWKHQWwB9vqui7GVaQ03PrdqZu9ruIBF', '2019-08-28 16:46:25', '2019-08-28 16:46:25'),
+(1, 'malek', 'malek@gmail.com', 'Administrateur', '$2y$10$6P4X7Eb/sYWQmTeeG1Rsv.xyP8oKniy0Bx6QYxfjZ7Ub5DOn8Ugnm', 'RXmKkqj9y8P0IlZUYI9gEQq6Ngejz2WqgbZVCGQcySOz2T71QjqOu2cQScrj', '2019-08-27 07:47:30', '2019-08-27 07:47:30'),
+(2, 'editor', 'editor@gmail.com', 'Editor', '$2y$10$6351eWeoy6aYjIWWV5b.2OeV9OgqBL0murywh0gwR8zAlthTuvCIy', 'dJtfntfk9cIdV7nBlidTskTp4SzsFutvmo3mAPAOuEaUWsJM1jqFDCz4p9EM', '2019-08-28 16:46:25', '2019-08-28 16:46:25'),
 (3, 'consulteur', 'consulteur@gmail.com', 'Consulteur', '$2y$10$jeHi57qVe9OyOfwA9AtRT.AZNbB3TK1wYmhg.j891VzXTXrKtvxAC', 'EFHtQTtLW820j6A2ID4LSM6lzs8rKYhfN3H5cqEuYnmITWidZxFMdCnsXQFT', '2019-08-28 16:58:48', '2019-08-28 16:58:48');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `accessoires`
+-- Indexes for table `accessoires`
 --
 ALTER TABLE `accessoires`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `approbations`
+-- Indexes for table `approbations`
 --
 ALTER TABLE `approbations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `campionarios`
+-- Indexes for table `campionarios`
 --
 ALTER TABLE `campionarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `fichecontroles`
+-- Indexes for table `fichecontroles`
 --
 ALTER TABLE `fichecontroles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `fournisseurs`
+-- Indexes for table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `integrations`
+-- Indexes for table `integrations`
 --
 ALTER TABLE `integrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Index pour la table `reclamations`
+-- Indexes for table `reclamations`
 --
 ALTER TABLE `reclamations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `accessoires`
+-- AUTO_INCREMENT for table `accessoires`
 --
 ALTER TABLE `accessoires`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pour la table `approbations`
+-- AUTO_INCREMENT for table `approbations`
 --
 ALTER TABLE `approbations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `campionarios`
+-- AUTO_INCREMENT for table `campionarios`
 --
 ALTER TABLE `campionarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `fichecontroles`
+-- AUTO_INCREMENT for table `fichecontroles`
 --
 ALTER TABLE `fichecontroles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pour la table `fournisseurs`
+-- AUTO_INCREMENT for table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `integrations`
+-- AUTO_INCREMENT for table `integrations`
 --
 ALTER TABLE `integrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT pour la table `reclamations`
+-- AUTO_INCREMENT for table `reclamations`
 --
 ALTER TABLE `reclamations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
